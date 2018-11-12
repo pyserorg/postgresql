@@ -1,0 +1,24 @@
+---
+- name: create DB
+  become_user: postgres
+  postgresql_db:
+    name: pyser
+    encoding: UTF-8
+    maintenance_db: postgres
+    login_user: pgsql
+
+- name: create DB user
+  postgresql_user:
+    name: pyser
+    password: pyser
+    db: pyser
+    login_user: pgsql
+
+- name: create test DB
+  become_user: postgres
+  postgresql_db:
+    name: pysertest
+    encoding: UTF-8
+    maintenance_db: postgres
+    login_user: pgsql
+    owner: pyser
